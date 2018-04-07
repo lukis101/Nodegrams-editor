@@ -16,6 +16,9 @@
 
 #include "Nodegrams/nodes/time/SysTimeNode.h"
 #include "Nodegrams/nodes/TestNode.h"
+#include "Nodegrams/nodes/logic/gates/ANDGate.h"
+#include "Nodegrams/nodes/logic/gates/ORGate.h"
+#include "Nodegrams/nodes/logic/gates/XORGate.h"
 
 #include "Nodegrams/datatypes/Event.h"
 #include "Nodegrams/datatypes/Boolean.h"
@@ -44,24 +47,28 @@ int main(int, char**)
     Nodegrams::Nodegrams engine(l_ndgm);
     engine.Init();
 
-    engine.typereg->RegisterDataType(new Nodegrams::Event(&engine));
-    engine.typereg->RegisterDataType(new Nodegrams::Boolean(&engine));
-    engine.typereg->RegisterDataType(new Nodegrams::Float(&engine));
-    engine.typereg->RegisterDataType(new Nodegrams::Double(&engine));
-    engine.typereg->RegisterDataType(new Nodegrams::Int32(&engine));
-    engine.typereg->RegisterDataType(new Nodegrams::Int64(&engine));
+    engine.typereg->RegisterDataType(new Nodegrams::Data::Event(&engine));
+    engine.typereg->RegisterDataType(new Nodegrams::Data::Boolean(&engine));
+    engine.typereg->RegisterDataType(new Nodegrams::Data::Float(&engine));
+    engine.typereg->RegisterDataType(new Nodegrams::Data::Double(&engine));
+    engine.typereg->RegisterDataType(new Nodegrams::Data::Int32(&engine));
+    engine.typereg->RegisterDataType(new Nodegrams::Data::Int64(&engine));
 
-    engine.RegisterNode(new Nodegrams::SysTimeNode(&engine));
-    engine.RegisterNode(new Nodegrams::TestNode(&engine));
+    engine.RegisterNode(new Nodegrams::Nodes::SysTimeNode(&engine));
+    engine.RegisterNode(new Nodegrams::Nodes::TestNode(&engine));
+    engine.RegisterNode(new Nodegrams::Nodes::Logic::ANDGate(&engine));
+    engine.RegisterNode(new Nodegrams::Nodes::Logic::ORGate(&engine));
+    engine.RegisterNode(new Nodegrams::Nodes::Logic::XORGate(&engine));
     int tnode = engine.AddNode("TESTS:TestNode");
     int stnode = engine.AddNode("TIME:SysTimeNode");
+    int andgatenode = engine.AddNode("LOGIC:GATES:AND gate");
+    int orgatenode = engine.AddNode("LOGIC:GATES:OR gate");
+    int xorgatenode = engine.AddNode("LOGIC:GATES:XOR gate");
 
     l_ndgm->info("PrintNodes: \n{}", engine.PrintNodes(true));
 
     l_ndgm->info("I-O connect 1 = {}", engine.ConnectInoutlets(stnode, 0, tnode, 1));
     l_ndgm->info("I-O connect 2 = {}", engine.ConnectInoutlets(stnode, 1, tnode, 0));
-
-    engine.Update();
 
     auto l_gui = spdlog::stdout_logger_mt("GUI");
 
