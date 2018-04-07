@@ -1,6 +1,7 @@
 [submodule "Nodegrams"]
 	path = Nodegrams
 	url = https://github.com/lukis101/Nodegrams
+	branch = master
 [submodule "GLFW"]
 	path = external/glfw
 	url = https://github.com/glfw/glfw
