@@ -1,0 +1,19 @@
+
+imgui.ini
+
+*.doxcfg
+
+bin/
+lib/
+
+build*/
+
+x64/
+Win32/
+
+# Visual Studio Code
+.vscode/
+
+# Windows
+.vs/
+CMakeSettings.json

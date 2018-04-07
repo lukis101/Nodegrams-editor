@@ -1,0 +1,9 @@
+[submodule "Nodegrams"]
+	path = Nodegrams
+	url = https://github.com/lukis101/Nodegrams
+[submodule "GLFW"]
+	path = external/glfw
+	url = https://github.com/glfw/glfw
+[submodule "ImGui"]
+	path = external/imgui
+	url = https://github.com/ocornut/imgui
